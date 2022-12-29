@@ -1,19 +1,23 @@
 package com.rakitov.learning_netology_java_spring_security.entity;
 
-import jakarta.persistence.*;
+import lombok.*;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 /**
- * Сущность Персоны из базы.
- * Поскольку имя таблицы заглавными буквами - пришлось немного помаяться.
- * Ну и для дущи не стал включать ломбок, чтобы насладиться всей мощью POJO ;)
- *
  * @author Stanislav Rakitov
  */
-@Entity
-@IdClass(PersonId.class)
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "PERSONS")
+@IdClass(PersonId.class)
+@Entity
 public class Person {
     @Id
     @Column(length = 50)
@@ -31,57 +35,6 @@ public class Person {
 
     @Column(name = "city_of_living", length = 100)
     private String cityOfLiving;
-
-    public Person() {
-    }
-
-    public Person(String name, String surname, int age, String phoneNumber, String cityOfLiving) {
-        this.name = name;
-        this.surname = surname;
-        this.age = age;
-        this.phoneNumber = phoneNumber;
-        this.cityOfLiving = cityOfLiving;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getCityOfLiving() {
-        return cityOfLiving;
-    }
-
-    public void setCityOfLiving(String cityOfLiving) {
-        this.cityOfLiving = cityOfLiving;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -105,16 +58,5 @@ public class Person {
         result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
         result = 31 * result + (cityOfLiving != null ? cityOfLiving.hashCode() : 0);
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", age=" + age +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", cityOfLiving='" + cityOfLiving + '\'' +
-                '}';
     }
 }
